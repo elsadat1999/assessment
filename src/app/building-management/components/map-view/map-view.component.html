@@ -1,0 +1,16 @@
+<div class="container">
+  <ng-container *ngIf="!loading; else loader">
+    <ng-container [ngTemplateOutlet]="MAP"></ng-container>
+  </ng-container>
+</div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #MAP>
+  <div id="ol-map" class="map-container"></div>
+  <div id="popup" class="tooltip">
+    {{ this.buliding.name }} Located in {{ this.buliding.country.name }}
+  </div>
+</ng-template>
+

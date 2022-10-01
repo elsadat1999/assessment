@@ -1,0 +1,52 @@
+<div class="add-edit-buliding">
+  <h2 class="title">Add/Edit Building</h2>
+  <ng-container *ngIf="!loading; else loader">
+    <ng-container [ngTemplateOutlet]="add_edit_page"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #add_edit_page>
+  <div class="buliding-data" [formGroup]="form">
+    <div class="buliding-name">
+      <p>name:</p>
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="building name"
+        name="building name"
+      />
+    </div>
+
+    <div class="buliding-location">
+      <p>location:</p>
+      <select formControlName="country">
+        <option disabled [value]="null">select country</option>
+        <option *ngFor="let country of countries" [value]="country.id">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button [routerLink]="['../map-view/', listBuliding[0].id]">cancel</button>
+    <button
+      [disabled]="form.invalid"
+      *ngIf="!activatedRoute.snapshot.queryParams['id']"
+      (click)="addBuliding()"
+    >
+      create
+    </button>
+    <button
+      [disabled]="form.invalid"
+      *ngIf="!!activatedRoute.snapshot.queryParams['id']"
+      (click)="editBuliding()"
+    >
+      edit
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

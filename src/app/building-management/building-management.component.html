@@ -1,0 +1,31 @@
+<div class="select-users">
+  <select>
+    <option>client 1</option>
+  </select>
+</div>
+
+<div class="container">
+  <div class="buliding-list">
+    <h2 class="buliding-title">Bulidings</h2>
+    <ul class="Bulidings">
+      <ng-container *ngFor="let buliding of bulidings">
+        <li routerLink="./map-view/{{ buliding.id }}" routerLinkActive="active">
+          {{ buliding.name }}
+
+          <div class="buttons">
+            <button class="edit" (click)="editBuliding(buliding.id)">
+              <img src="assets/edit.png" />
+            </button>
+            <button (click)="deleteBuliding(buliding)">
+              <img src="assets/delete.png" />
+            </button>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+    <button class="button-add" routerLink="./add-edit">Add Buliding</button>
+  </div>
+  <div class="container-view">
+    <router-outlet></router-outlet>
+  </div>
+</div>
